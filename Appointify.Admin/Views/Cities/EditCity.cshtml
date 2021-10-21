@@ -1,0 +1,52 @@
+﻿@model Appointify.Admin.ViewModels.Cities.EditViewModel
+
+
+@inject Dropdown Dropdown
+
+@{
+    ViewData["Title"] = Strings.EditCity;
+    ViewData["Page"] = NavigationPages.EditCity;
+}
+
+<div class="col-md-6 col-12">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <form asp-action="EditCity" method="post" class="form form-horizontal">
+                    <div class="form-body">
+                        <div class="row">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger fade show mb-4" role="alert">
+                                    @Html.ValidationSummary()
+                                </div>
+                            }
+                            <div class="col-md-4">
+                                <label>@Strings.CityName</label>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <input asp-for="Name" type="text" class="form-control" placeholder="@Strings.CityName" value="@Model.Name">
+                            </div>
+                            <div class="col-md-4">
+                                <label>@Strings.PostalCode</label>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <input asp-for="PostalCode" type="number" class="form-control" placeholder="@Strings.PostalCode" value="@Model.PostalCode">
+                            </div>
+                            <div class="col-md-4">
+                                <label>@Strings.Country</label>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <select asp-for="CountryId" asp-items="@await Dropdown.Countries()"></select>
+                            </div>
+                            <input asp-for="Id" type="hidden" value="@Model.Id">
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

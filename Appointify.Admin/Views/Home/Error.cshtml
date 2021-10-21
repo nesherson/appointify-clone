@@ -1,0 +1,16 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">
+    @if (Model == 401)
+    {
+        <span>Niste autorizovani!</span>
+    }
+    else
+    {
+        <span>Dogodila se greška!</span>
+    }
+</h1>

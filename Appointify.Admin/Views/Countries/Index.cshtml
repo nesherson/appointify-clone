@@ -1,0 +1,121 @@
+﻿@model Appointify.Admin.ViewModels.Countries.IndexViewModel
+
+@{
+    ViewData["Title"] = Strings.Countries;
+    ViewData["Page"] = NavigationPages.Countries;
+}
+
+<section class="section">
+    <div class="row match-height">
+        <div class="col-6 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">@Strings.SearchByName</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="FilterCountries" method="post" class="form">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="country-name-column">@Strings.CountryName</label>
+                                    <input asp-for="Name" type="text" id="country-name-column" class="form-control" placeholder="@Strings.CountryName">
+                                </div>
+                                <button type="submit" class="btn btn-primary me-1 mb-1">@Strings.Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">@Strings.ShowingCountries</h4>
+        </div>
+        <div class="card-content">
+            <div class="table-responsive">
+                <table class="table mb-0 table-lg">
+                    <thead>
+                        <tr>
+                            <th>@Strings.Name</th>
+                            <th>@Strings.CreatedAt</th>
+                            <th>@Strings.ModifiedAt</th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in Model.Countries)
+                        {
+                            <tr id="country_@c.Id">
+                                <td class="text-bold-500">@c.Name</td>
+                                <td>@c.CreatedAt</td>
+                                @if (c.ModifiedAt != null)
+                                {
+                                    <td>@c.ModifiedAt</td>
+                                }
+                                else
+                                {
+                                    <td>Not modified</td>
+
+                                }
+                                <td>
+                                    <a asp-controller="Countries" asp-action="EditCountry" asp-route-id="@c.Id" class="btn btn-primary">@Strings.EditCountry</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger delete-country" data-id="@c.Id" data-bs-toggle="modal" data-
+                                        data-bs-target="#remove-country-modal">@Strings.RemoveCountry</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="remove-country-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Strings.RemoveCountryConfirmation?</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="countryIdToDelete" />
+                    <button type="submit" id="removeBtn" class="btn px-4 btn-danger">@Strings.Yes</button>
+                    <button type="button" class="btn px-4 btn-secondary" data-bs-dismiss="modal">@Strings.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $(".delete-country").on("click", function () {
+                var idToDelete = $(this).data("id");
+                $("#countryIdToDelete").val(idToDelete);
+            });
+
+            $("#removeBtn").on("click", function () {
+                var idToDelete = $("#countryIdToDelete").val();
+                $("#country_" + idToDelete).hide("slow");
+                $.ajax({
+                    url: '/Countries/RemoveCountry',
+                    type: 'POST',
+                    data: { id: idToDelete },
+                    success: function (data) {
+                        $("#remove-country-modal").modal("hide");
+                    },
+                    error: function (data) {
+                        $("#remove-country-modal").modal("hide");
+                        $("#country_" + idToDelete).show();
+                    }
+                });
+            });
+        })
+    </script>
+</section>

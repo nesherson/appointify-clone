@@ -1,0 +1,43 @@
+﻿@inject UserManager UserManager
+
+@{
+    var page = ViewData["Page"] as NavigationPages?;
+}
+
+<div class="sidebar-menu">
+    <ul class="menu">
+        <li class="sidebar-item @(page == NavigationPages.Home ? "active" : "")">
+            <a href="/" class="sidebar-link">
+                <i class="bi bi-grid-fill"></i>
+                <span>@Strings.HomePage</span>
+            </a>
+        </li>
+        @if (UserManager.IsInRoles(Role.SuperAdministrator))
+        {
+            <li class="sidebar-item @(page == NavigationPages.AddCountry ? "active" : "")">
+                <a asp-action="AddCountry" asp-controller="Countries" class="sidebar-link">
+                    <i class="bi bi-plus-circle"></i>
+                    <span>@Strings.AddCountry</span>
+                </a>
+            </li>
+            <li class="sidebar-item @(page == NavigationPages.Countries ? "active" : "")">
+                <a asp-action="Index" asp-controller="Countries" class="sidebar-link">
+                    <i class="bi bi-flag"></i>
+                    <span>@Strings.Countries</span>
+                </a>
+            </li>
+            <li class="sidebar-item @(page == NavigationPages.AddCity ? "active" : "")">
+                <a asp-action="AddCity" asp-controller="Cities" class="sidebar-link">
+                    <i class="bi bi-plus-circle"></i>
+                    <span>@Strings.AddCity</span>
+                </a>
+            </li>
+            <li class="sidebar-item @(page == NavigationPages.Cities ? "active" : "")">
+                <a asp-action="Index" asp-controller="Cities" class="sidebar-link">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>@Strings.Cities</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

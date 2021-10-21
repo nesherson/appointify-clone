@@ -1,0 +1,142 @@
+﻿@model Appointify.Admin.ViewModels.Cities.IndexViewModel
+
+@inject Dropdown Dropdown
+
+@{
+    ViewData["Title"] = Strings.Cities;
+    ViewData["Page"] = NavigationPages.Cities;
+}
+
+<section class="section">
+    <div class="row match-height mb-3">
+        <div class="card col-5 m-3">
+            <div class="card-header">
+                <h4 class="card-title">@Strings.SearchByPostalCode</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="FilterCities" method="post" class="form">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input asp-for="PostalCode" type="number" id="postal-code-column" class="form-control" placeholder="@Strings.PostalCode">
+                            </div>
+                            <button type="submit" class="btn btn-primary me-1 mb-1">@Strings.Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card col-5 m-3">
+            <div class="card-header">
+                <h4 class="card-title">@Strings.SearchByCountry</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="FilterCities" method="post" class="form">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <select asp-for="CountryId" class="form-control" id="country-column" asp-items="@await Dropdown.Countries()"></select>
+                            </div>
+                            <button type="submit" class="btn btn-primary me-1 mb-1">@Strings.Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">@Strings.ShowingCities</h4>
+        </div>
+        <div class="card-content">
+
+            <div class="table-responsive">
+                <table class="table mb-0 table-lg">
+                    <thead>
+                        <tr>
+                            <th>@Strings.Name</th>
+                            <th>@Strings.PostalCode</th>
+                            <th>@Strings.Country</th>
+                            <th>@Strings.CreatedAt</th>
+                            <th>@Strings.ModifiedAt</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in Model.Cities)
+                        {
+                            <tr id="city_@c.Id">
+                                <td>@c.Name</td>
+                                <td>@c.PostalCode</td>
+                                <td>@c.Country.Name</td>
+                                <td>@c.CreatedAt</td>
+                                @if (c.ModifiedAt != null)
+                                {
+                                    <td>@c.ModifiedAt</td>
+                                }
+                                else
+                                {
+                                    <td>Not modified</td>
+                                }
+                                <td>
+                                    <a asp-controller="Cities" asp-action="EditCity" asp-route-id="@c.Id" class="btn btn-primary">@Strings.EditCity</a>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger delete-city" data-id="@c.Id" data-bs-toggle="modal" data-
+                                        data-bs-target="#remove-city-modal">@Strings.RemoveCity</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="remove-city-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Strings.RemoveCityConfirmation?</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="idToDelete" />
+                    <button type="submit" id="removeBtn" class="btn px-4 btn-danger">@Strings.Yes</button>
+                    <button type="button" class="btn px-4 btn-secondary" data-bs-dismiss="modal">@Strings.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $(".delete-city").on("click", function () {
+                var idToDelete = $(this).data("id");
+                $("#idToDelete").val(idToDelete);
+            });
+
+            $("#removeBtn").on("click", function () {
+                var idToDelete = $("#idToDelete").val();
+                $("#city_" + idToDelete).hide("slow");
+                $.ajax({
+                    url: '/Cities/RemoveCity',
+                    type: 'POST',
+                    data: { id: idToDelete },
+                    success: function (data) {
+                        $("#remove-city-modal").modal("hide");
+                    },
+                    error: function (data) {
+                        $("#remove-city-modal").modal("hide");
+                        $("#city_" + idToDelete).show();
+                    }
+                });
+            });
+        })
+    </script>
+</section>
+
