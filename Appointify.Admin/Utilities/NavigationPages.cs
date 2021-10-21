@@ -9,6 +9,7 @@
         AddCountry,
         EditCity,
         EditCountry,
-        Users
+        Users,
+        AddUser
     }
 }
