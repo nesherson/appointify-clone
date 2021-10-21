@@ -162,11 +162,20 @@
   <data name="EditCountry" xml:space="preserve">
     <value>Uredi državu</value>
   </data>
+  <data name="EditUser" xml:space="preserve">
+    <value>Uredi korisnika</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Ime</value>
+  </data>
   <data name="Hello" xml:space="preserve">
     <value>Zdravo</value>
   </data>
   <data name="HomePage" xml:space="preserve">
     <value>Početna</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Prezime</value>
   </data>
   <data name="ModifiedAt" xml:space="preserve">
     <value>Datum modificiranja</value>
@@ -198,8 +207,14 @@
   <data name="RemoveCountryConfirmation" xml:space="preserve">
     <value>Jeste li sigurni da želite obrisati državu</value>
   </data>
+  <data name="RemoveUser" xml:space="preserve">
+    <value>Ukloni korisnika</value>
+  </data>
   <data name="ResetPassword" xml:space="preserve">
     <value>Zaboravljena lozinka?</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Uloga</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Pretraga</value>
@@ -219,6 +234,9 @@
   <data name="ShowingCountries" xml:space="preserve">
     <value>Prikaz država</value>
   </data>
+  <data name="ShowingUsers" xml:space="preserve">
+    <value>Prikazivanje korisnika</value>
+  </data>
   <data name="SignIn" xml:space="preserve">
     <value>Prijava</value>
   </data>
@@ -230,6 +248,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Korisničko ime</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Korisnici</value>
   </data>
   <data name="WrongCredentials" xml:space="preserve">
     <value>Korisničko ime ili lozinka nisu tačni.</value>

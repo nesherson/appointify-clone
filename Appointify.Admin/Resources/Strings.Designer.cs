@@ -196,6 +196,24 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uredi korisnika.
+        /// </summary>
+        public static string EditUser {
+            get {
+                return ResourceManager.GetString("EditUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ime.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zdravo.
         /// </summary>
         public static string Hello {
@@ -210,6 +228,15 @@ namespace Appointify.Admin.Resources {
         public static string HomePage {
             get {
                 return ResourceManager.GetString("HomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prezime.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
         
@@ -304,11 +331,29 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ukloni korisnika.
+        /// </summary>
+        public static string RemoveUser {
+            get {
+                return ResourceManager.GetString("RemoveUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zaboravljena lozinka?.
         /// </summary>
         public static string ResetPassword {
             get {
                 return ResourceManager.GetString("ResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uloga.
+        /// </summary>
+        public static string Role {
+            get {
+                return ResourceManager.GetString("Role", resourceCulture);
             }
         }
         
@@ -367,6 +412,15 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prikazivanje korisnika.
+        /// </summary>
+        public static string ShowingUsers {
+            get {
+                return ResourceManager.GetString("ShowingUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prijava.
         /// </summary>
         public static string SignIn {
@@ -399,6 +453,15 @@ namespace Appointify.Admin.Resources {
         public static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korisnici.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
             }
         }
         
