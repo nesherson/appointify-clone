@@ -79,6 +79,15 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj korisnika.
+        /// </summary>
+        public static string AddUser {
+            get {
+                return ResourceManager.GetString("AddUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appointify.
         /// </summary>
         public static string ApplicationName {
@@ -129,6 +138,15 @@ namespace Appointify.Admin.Resources {
         public static string CityName {
             get {
                 return ResourceManager.GetString("CityName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kompanija.
+        /// </summary>
+        public static string Company {
+            get {
+                return ResourceManager.GetString("Company", resourceCulture);
             }
         }
         

@@ -123,6 +123,9 @@
   <data name="AddCountry" xml:space="preserve">
     <value>Dodaj državu</value>
   </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Dodaj korisnika</value>
+  </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>Appointify</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="CityName" xml:space="preserve">
     <value>Ime grada</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Kompanija</value>
   </data>
   <data name="Countries" xml:space="preserve">
     <value>Države</value>
