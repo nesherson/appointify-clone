@@ -21,9 +21,10 @@ namespace Appointify.Admin
 
         public void ConfigureServices(IServiceCollection services)
         {
+            string dbKey = _configuration["ConnectionString"];
             services.AddDbContextPool<DatabaseContext>(options =>
             {
-                options.UseNpgsql(_configuration.GetConnectionString("Main"));
+                options.UseNpgsql(dbKey);
             });
             services.AddScoped<UserManager>();
             services.AddScoped<Dropdown>();
