@@ -38,6 +38,12 @@
                     <span>@Strings.Cities</span>
                 </a>
             </li>
+            <li class="sidebar-item @(page == NavigationPages.Users ? "active" : "")">
+                <a asp-action="Index" asp-controller="Users" class="sidebar-link">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>@Strings.Users</span>
+                </a>
+            </li>
         }
     </ul>
 </div>
