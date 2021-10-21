@@ -1,0 +1,60 @@
+﻿@model Appointify.Admin.ViewModels.Users.IndexViewModel 
+
+@{
+    ViewData["Title"] = Strings.Users;
+    ViewData["Page"] = NavigationPages.Users;
+}
+
+<section class="section">
+   
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">@Strings.ShowingUsers</h4>
+        </div>
+        <div class="card-content">
+
+            <div class="table-responsive">
+                <table class="table mb-0 table-lg">
+                    <thead>
+                        <tr>
+                            <th>@Strings.FirstName</th>
+                            <th>@Strings.LastName</th>
+                            <th>@Strings.Username</th>
+                            <th>Email</th>
+                            <th>@Strings.Role</th>
+                            <th>@Strings.City</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var u in Model.Users)
+                        {
+                        <tr id="city_@u.Id">
+                            <td>@u.FirstName</td>
+                            <td>@u.LastName</td>
+                            <td>@u.Username</td>
+                            <td>@u.Email</td>
+                            <td>@u.Role</td>
+                            <td>@u.City.Name</td>
+                            <td>
+                                <a asp-controller="Users" asp-action="EditUser" asp-route-id="@u.Id" class="btn btn-primary">@Strings.EditUser</a>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger delete-city" data-id="@u.Id" data-bs-toggle="modal" data-
+                                        data-bs-target="#remove-city-modal">
+                                    @Strings.RemoveUser
+                                </button>
+                            </td>
+                        </tr>
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+   
+
+</section>
+

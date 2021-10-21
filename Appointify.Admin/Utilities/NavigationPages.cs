@@ -8,6 +8,7 @@
         Cities,
         AddCountry,
         EditCity,
-        EditCountry
+        EditCountry,
+        Users
     }
 }
