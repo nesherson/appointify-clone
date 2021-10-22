@@ -18,6 +18,7 @@ namespace Appointify.Admin.Controllers
             _dbContext = dbContext;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
 
@@ -29,8 +30,28 @@ namespace Appointify.Admin.Controllers
                 .ToListAsync()
             };
 
-
             return View(viewModel);
         }
+
+        [HttpGet]
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUser(AddViewModel viewModel)
+        {
+            return View();
+            
+        }
+
+        public async Task<JsonResult> GetCompanies()
+        {
+            var companies = await _dbContext.Companies.ToListAsync();
+
+            return Json(companies);
+        }
+
     }
 }
