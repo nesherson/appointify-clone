@@ -61,6 +61,15 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dodaj grad.
         /// </summary>
         public static string AddCity {
@@ -70,11 +79,38 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potrebno je unijeti naziv grada i poštanski broj.
+        /// </summary>
+        public static string AddCityInputsRequired {
+            get {
+                return ResourceManager.GetString("AddCityInputsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dodaj državu.
         /// </summary>
         public static string AddCountry {
             get {
                 return ResourceManager.GetString("AddCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodavanje novog grada.
+        /// </summary>
+        public static string AddingNewCity {
+            get {
+                return ResourceManager.GetString("AddingNewCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dodavanje nove države.
+        /// </summary>
+        public static string AddingNewCountry {
+            get {
+                return ResourceManager.GetString("AddingNewCountry", resourceCulture);
             }
         }
         
@@ -133,7 +169,7 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ime grada.
+        ///   Looks up a localized string similar to Naziv grada.
         /// </summary>
         public static string CityName {
             get {
@@ -178,11 +214,20 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ime države.
+        ///   Looks up a localized string similar to Naziv države.
         /// </summary>
         public static string CountryName {
             get {
                 return ResourceManager.GetString("CountryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potrebno je unijeti naziv države.
+        /// </summary>
+        public static string CountryNameRequired {
+            get {
+                return ResourceManager.GetString("CountryNameRequired", resourceCulture);
             }
         }
         
@@ -268,11 +313,29 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ime.
+        ///   Looks up a localized string similar to Naziv.
         /// </summary>
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Novi grad.
+        /// </summary>
+        public static string NewCity {
+            get {
+                return ResourceManager.GetString("NewCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nova država.
+        /// </summary>
+        public static string NewCountry {
+            get {
+                return ResourceManager.GetString("NewCountry", resourceCulture);
             }
         }
         
@@ -408,6 +471,33 @@ namespace Appointify.Admin.Resources {
         public static string SearchByPostalCode {
             get {
                 return ResourceManager.GetString("SearchByPostalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izaberi.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izaberi grad.
+        /// </summary>
+        public static string SelectCity {
+            get {
+                return ResourceManager.GetString("SelectCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Izaberi državu.
+        /// </summary>
+        public static string SelectCountry {
+            get {
+                return ResourceManager.GetString("SelectCountry", resourceCulture);
             }
         }
         

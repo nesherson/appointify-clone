@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
   <data name="AddCity" xml:space="preserve">
     <value>Dodaj grad</value>
   </data>
+  <data name="AddCityInputsRequired" xml:space="preserve">
+    <value>Potrebno je unijeti naziv grada i poštanski broj</value>
+  </data>
   <data name="AddCountry" xml:space="preserve">
     <value>Dodaj državu</value>
+  </data>
+  <data name="AddingNewCity" xml:space="preserve">
+    <value>Dodavanje novog grada</value>
+  </data>
+  <data name="AddingNewCountry" xml:space="preserve">
+    <value>Dodavanje nove države</value>
   </data>
   <data name="AddUser" xml:space="preserve">
     <value>Dodaj korisnika</value>
@@ -142,7 +154,7 @@
     <value>Grad vec postoji</value>
   </data>
   <data name="CityName" xml:space="preserve">
-    <value>Ime grada</value>
+    <value>Naziv grada</value>
   </data>
   <data name="Company" xml:space="preserve">
     <value>Kompanija</value>
@@ -157,7 +169,10 @@
     <value>Država već postoji</value>
   </data>
   <data name="CountryName" xml:space="preserve">
-    <value>Ime države</value>
+    <value>Naziv države</value>
+  </data>
+  <data name="CountryNameRequired" xml:space="preserve">
+    <value>Potrebno je unijeti naziv države</value>
   </data>
   <data name="CreatedAt" xml:space="preserve">
     <value>Datum kreiranja</value>
@@ -187,7 +202,13 @@
     <value>Datum modificiranja</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Ime</value>
+    <value>Naziv</value>
+  </data>
+  <data name="NewCity" xml:space="preserve">
+    <value>Novi grad</value>
+  </data>
+  <data name="NewCountry" xml:space="preserve">
+    <value>Nova država</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Ne</value>
@@ -233,6 +254,15 @@
   </data>
   <data name="SearchByPostalCode" xml:space="preserve">
     <value>Pretraga po poštanskom broju</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Izaberi</value>
+  </data>
+  <data name="SelectCity" xml:space="preserve">
+    <value>Izaberi grad</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>Izaberi državu</value>
   </data>
   <data name="ShowingCities" xml:space="preserve">
     <value>Prikaz gradova</value>
