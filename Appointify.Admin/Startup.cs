@@ -26,6 +26,8 @@ namespace Appointify.Admin
             {
                 options.UseNpgsql(dbKey);
             });
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<UserManager>();
             services.AddScoped<Dropdown>();
             services.AddHttpContextAccessor();
