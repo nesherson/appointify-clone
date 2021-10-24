@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
 
+using AutoMapper;
+
 using Appointify.Data.Entities;
 using Appointify.Admin.Utilities;
 using Appointify.Admin.ViewModels.Countries;
@@ -16,9 +18,12 @@ namespace Appointify.Admin.Controllers
     {
 
         private readonly DatabaseContext _dbContext;
-        public CountriesController(DatabaseContext dbContext)
+        private readonly IMapper _mapper;
+
+        public CountriesController(DatabaseContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -32,9 +37,17 @@ namespace Appointify.Admin.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> FilterCountries(IndexViewModel viewModel)
         {
+
+            if (string.IsNullOrWhiteSpace(viewModel.Name))
+            {
+                viewModel.Countries = await _dbContext.Countries
+                               .ToListAsync();
+                return View("Index", viewModel);
+            }
+
             viewModel.Countries = await _dbContext.Countries
                                 .Where(c => !string.IsNullOrWhiteSpace(viewModel.Name) && c.Name.Contains(viewModel.Name))
                                 .ToListAsync();
@@ -51,6 +64,13 @@ namespace Appointify.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCountry(AddViewModel viewModel)
         {
+
+            if (viewModel.Name == null)
+            {
+                ModelState.AddModelError(string.Empty, Strings.CountryNameRequired);
+                return View(viewModel);
+            }
+
             var country = await _dbContext.Countries.FirstOrDefaultAsync(c => c.Name == viewModel.Name);
             if (country != null)
             {
@@ -58,12 +78,11 @@ namespace Appointify.Admin.Controllers
                 return View();
             }
 
-            country = new Country
-            {
-                Name = viewModel.Name
-            };
+            country = new Country();
 
-            _dbContext.Countries.Add(country);
+            _mapper.Map(viewModel, country);
+
+            await _dbContext.Countries.AddAsync(country);
             await _dbContext.SaveChangesAsync();
 
             return RedirectToAction("AddCountry");
@@ -74,28 +93,22 @@ namespace Appointify.Admin.Controllers
         {
             var country = await _dbContext.Countries.FindAsync(id);
 
-            var viewModel = new EditViewModel
-            {
-                Id = country.Id,
-                Name = country.Name
-            };
-
-            return View(viewModel);
+            return View(_mapper.Map<EditViewModel>(country));
         }
 
         [HttpPost]
         public async Task<IActionResult> EditCountry(EditViewModel viewModel)
         {
-            var country = await _dbContext.Countries.FirstOrDefaultAsync(c => (!string.IsNullOrWhiteSpace(viewModel.Name) && c.Name == viewModel.Name));
-
-            if (country != null)
+            if (viewModel.Name == null)
             {
-                ModelState.AddModelError(string.Empty, Strings.CountryAlreadyExists);
+                ModelState.AddModelError(string.Empty, Strings.CountryNameRequired);
                 return View(viewModel);
             }
 
-            country = await _dbContext.Countries.FindAsync(viewModel.Id);
-            country.Name = viewModel.Name;
+            var country = await _dbContext.Countries.FindAsync(viewModel.Id);
+
+            _mapper.Map(viewModel, country);
+
             _dbContext.Update(country);
             await _dbContext.SaveChangesAsync();
 

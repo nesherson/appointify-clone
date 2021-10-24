@@ -4,8 +4,8 @@
 @inject Dropdown Dropdown
 
 @{
-    ViewData["Title"] = Strings.EditCity;
-    ViewData["Page"] = NavigationPages.EditCity;
+    ViewData["Title"] = Strings.Cities;
+    ViewData["Page"] = NavigationPages.Cities;
 }
 
 <div class="col-md-6 col-12">
@@ -37,7 +37,7 @@
                                 <label>@Strings.Country</label>
                             </div>
                             <div class="col-md-8 form-group">
-                                <select asp-for="CountryId" asp-items="@await Dropdown.Countries()"></select>
+                                <select asp-for="CountryId" asp-items="@await Dropdown.Countries()" class="form-control"></select>
                             </div>
                             <input asp-for="Id" type="hidden" value="@Model.Id">
                             <div class="col-sm-12 d-flex justify-content-end">

@@ -25,5 +25,15 @@ namespace Appointify.Admin.Utilities
         {
             return session.Keys.Contains(key);
         }
+
+        public static bool IsSet(this string input)
+        {
+            return !string.IsNullOrWhiteSpace(input) && !string.IsNullOrEmpty(input);
+        }
+
+        public static bool IsNotSet(this string input)
+        {
+            return !IsSet(input);
+        }
     }
 }

@@ -7,8 +7,6 @@
         AddCity,
         Cities,
         AddCountry,
-        EditCity,
-        EditCountry,
         Users,
         AddUser
     }
