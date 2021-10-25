@@ -7,46 +7,73 @@
     ViewData["Page"] = NavigationPages.Cities;
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $(".delete-city").on("click", function () {
+            var idToDelete = $(this).data("id");
+            $("#idToDelete").val(idToDelete);
+        });
+
+        $("#removeBtn").on("click", function () {
+            var idToDelete = $("#idToDelete").val();
+            $("#city_" + idToDelete).hide("slow");
+            $.ajax({
+                url: '/Cities/RemoveCity',
+                type: 'POST',
+                data: { id: idToDelete },
+                success: function (data) {
+                    $("#remove-city-modal").modal("hide");
+                },
+                error: function (data) {
+                    $("#remove-city-modal").modal("hide");
+                    $("#city_" + idToDelete).show();
+                }
+            });
+        });
+    })
+</script>
+
 <section class="section">
-        <div class="card">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between mb-3">
-                        <h4 class="card-title">@Strings.Search</h4>
-                        <div class="col-auto">
-                            <div class="form-group">
-                                <a asp-action="AddCity" asp-controller="Cities" class="btn btn-secondary px-4">
-                                    @Strings.AddCity
-                                </a>
-                            </div>
+    <div class="card">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between mb-3">
+                    <h4 class="card-title">@Strings.Search</h4>
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <a asp-action="AddCity" asp-controller="Cities" class="btn btn-secondary px-4">
+                                @Strings.AddCity
+                            </a>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <form asp-action="FilterCities" method="get" class="form">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <input asp-for="PostalCode" type="number" id="postal-code-column" class="form-control" placeholder="@Strings.PostalCode">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <select asp-for="CountryId" class="form-control square" id="country-column" asp-items="@await Dropdown.Countries()">
-                                            <option>@Strings.SelectCountry</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="row form-group mx-1">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">@Strings.Search</button>
-                                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-action="FilterCities" method="get" class="form">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input asp-for="PostalCode" type="number" id="postal-code-column" class="form-control" placeholder="@Strings.PostalCode">
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <select asp-for="CountryId" class="form-control square" id="country-column" asp-items="@await Dropdown.Countries()">
+                                        <option>@Strings.SelectCountry</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="row form-group mx-1">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">@Strings.Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-    
+        </div>
+
         <div class="card-header">
             <h4 class="card-title">@Strings.ShowingCities</h4>
         </div>
@@ -68,27 +95,27 @@
                     <tbody>
                         @foreach (var c in Model.Cities)
                         {
-                        <tr id="city_@c.Id">
-                            <td>@c.Name</td>
-                            <td>@c.PostalCode</td>
-                            <td>@c.Country.Name</td>
-                            <td>@c.CreatedAt</td>
-                            @if (c.ModifiedAt != null)
-                            {
-                                <td>@c.ModifiedAt</td>
-                            }
-                            else
-                            {
-                                <td>Not modified</td>
-                            }
-                            <td class="d-flex justify-content-between">
-                                <a asp-controller="Cities" asp-action="EditCity" asp-route-id="@c.Id" class="btn btn-outline-primary p-2"><i class="bi bi-pencil-square"></i></a>
-                                <button type="button" class="btn btn-outline-danger delete-city p-2" data-id="@c.Id" data-bs-toggle="modal" data-
-                                        data-bs-target="#remove-city-modal">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
+                            <tr id="city_@c.Id">
+                                <td>@c.Name</td>
+                                <td>@c.PostalCode</td>
+                                <td>@c.Country.Name</td>
+                                <td>@c.CreatedAt</td>
+                                @if (c.ModifiedAt != null)
+                                {
+                                    <td>@c.ModifiedAt</td>
+                                }
+                                else
+                                {
+                                    <td>Not modified</td>
+                                }
+                                <td class="d-flex justify-content-between">
+                                    <a asp-controller="Cities" asp-action="EditCity" asp-route-id="@c.Id" class="btn btn-outline-primary p-2"><i class="bi bi-pencil-square"></i></a>
+                                    <button type="button" class="btn btn-outline-danger delete-city p-2" data-id="@c.Id" data-bs-toggle="modal" data-
+                                            data-bs-target="#remove-city-modal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -113,31 +140,5 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $(function () {
-            $(".delete-city").on("click", function () {
-                var idToDelete = $(this).data("id");
-                $("#idToDelete").val(idToDelete);
-            });
-
-            $("#removeBtn").on("click", function () {
-                var idToDelete = $("#idToDelete").val();
-                $("#city_" + idToDelete).hide("slow");
-                $.ajax({
-                    url: '/Cities/RemoveCity',
-                    type: 'POST',
-                    data: { id: idToDelete },
-                    success: function (data) {
-                        $("#remove-city-modal").modal("hide");
-                    },
-                    error: function (data) {
-                        $("#remove-city-modal").modal("hide");
-                        $("#city_" + idToDelete).show();
-                    }
-                });
-            });
-        })
-    </script>
 </section>
 

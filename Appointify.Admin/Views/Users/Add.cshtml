@@ -11,8 +11,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        /*getCompanyList();*/
-
         $("#roleId").change(function (e) {
             var role = $("#roleId").val();
             if (role == 1) {
@@ -48,7 +46,7 @@
     <div class="card">
         <div class="card-content">
             <div class="card-body">
-                <form asp-action="AddUser" method="post" class="form form-horizontal">
+                <form asp-action="Add" method="post" class="form form-horizontal">
                     <div class="form-body">
                         <div class="row">
                             @if (!ViewData.ModelState.IsValid)
