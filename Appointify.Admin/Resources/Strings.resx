@@ -141,6 +141,9 @@
   <data name="AddUserInputRequired" xml:space="preserve">
     <value>Potrebno je unijeti email i korisničko ime</value>
   </data>
+  <data name="AddUserPasswordRequired" xml:space="preserve">
+    <value>Potrebno je unijeti šifru</value>
+  </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>Appointify</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Company" xml:space="preserve">
     <value>Kompanija</value>
+  </data>
+  <data name="CompanyAlreadyHasOwner" xml:space="preserve">
+    <value>Kompanija već ima vlasnika</value>
   </data>
   <data name="Countries" xml:space="preserve">
     <value>Države</value>
@@ -295,7 +301,7 @@
     <value>Korisnici</value>
   </data>
   <data name="WrongCredentials" xml:space="preserve">
-    <value>Korisničko ime ili lozinka nisu tačni.</value>
+    <value>Korisničko ime ili lozinka nisu tačni</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Da</value>

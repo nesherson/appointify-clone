@@ -133,6 +133,15 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potrebno je unijeti šifru.
+        /// </summary>
+        public static string AddUserPasswordRequired {
+            get {
+                return ResourceManager.GetString("AddUserPasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appointify.
         /// </summary>
         public static string ApplicationName {
@@ -192,6 +201,15 @@ namespace Appointify.Admin.Resources {
         public static string Company {
             get {
                 return ResourceManager.GetString("Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kompanija već ima vlasnika.
+        /// </summary>
+        public static string CompanyAlreadyHasOwner {
+            get {
+                return ResourceManager.GetString("CompanyAlreadyHasOwner", resourceCulture);
             }
         }
         
@@ -592,7 +610,7 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Korisničko ime ili lozinka nisu tačni..
+        ///   Looks up a localized string similar to Korisničko ime ili lozinka nisu tačni.
         /// </summary>
         public static string WrongCredentials {
             get {
