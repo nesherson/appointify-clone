@@ -41,13 +41,13 @@ namespace Appointify.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddUser()
+        public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser(AddViewModel viewModel)
+        public async Task<IActionResult> Add(AddViewModel viewModel)
         {
             if (viewModel.Username == null || viewModel.Email == null)
             {
@@ -100,7 +100,16 @@ namespace Appointify.Admin.Controllers
                 await _dbContext.SaveChangesAsync();
             }
 
-            return View();
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            var user = await _dbContext.Users.FindAsync(id);
+            _dbContext.Users.Remove(user);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         public async Task<JsonResult> GetCompanies()
@@ -109,6 +118,8 @@ namespace Appointify.Admin.Controllers
 
             return Json(companies);
         }
+
+
 
     }
 }
