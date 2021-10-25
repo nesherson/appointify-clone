@@ -124,6 +124,15 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potrebno je unijeti email i korisničko ime.
+        /// </summary>
+        public static string AddUserInputRequired {
+            get {
+                return ResourceManager.GetString("AddUserInputRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Appointify.
         /// </summary>
         public static string ApplicationName {
@@ -552,6 +561,15 @@ namespace Appointify.Admin.Resources {
         public static string Submit {
             get {
                 return ResourceManager.GetString("Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korisnik već postoji.
+        /// </summary>
+        public static string UserAlreadyExists {
+            get {
+                return ResourceManager.GetString("UserAlreadyExists", resourceCulture);
             }
         }
         

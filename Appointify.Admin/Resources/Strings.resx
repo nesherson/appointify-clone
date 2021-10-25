@@ -138,6 +138,9 @@
   <data name="AddUser" xml:space="preserve">
     <value>Dodaj korisnika</value>
   </data>
+  <data name="AddUserInputRequired" xml:space="preserve">
+    <value>Potrebno je unijeti email i korisničko ime</value>
+  </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>Appointify</value>
   </data>
@@ -281,6 +284,9 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Potvrdi</value>
+  </data>
+  <data name="UserAlreadyExists" xml:space="preserve">
+    <value>Korisnik već postoji</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Korisničko ime</value>
