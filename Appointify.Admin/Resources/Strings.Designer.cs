@@ -448,6 +448,15 @@ namespace Appointify.Admin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jeste li sigurni da želite obrisati korisnika.
+        /// </summary>
+        public static string RemoveUserConfirmation {
+            get {
+                return ResourceManager.GetString("RemoveUserConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zaboravljena lozinka?.
         /// </summary>
         public static string ResetPassword {

@@ -246,6 +246,9 @@
   <data name="RemoveUser" xml:space="preserve">
     <value>Ukloni korisnika</value>
   </data>
+  <data name="RemoveUserConfirmation" xml:space="preserve">
+    <value>Jeste li sigurni da želite obrisati korisnika</value>
+  </data>
   <data name="ResetPassword" xml:space="preserve">
     <value>Zaboravljena lozinka?</value>
   </data>
