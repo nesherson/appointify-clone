@@ -49,10 +49,15 @@ namespace Appointify.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser(AddViewModel viewModel)
         {
-
             if (viewModel.Username == null || viewModel.Email == null)
             {
                 ModelState.AddModelError(string.Empty, Strings.AddUserInputRequired);
+                return View();
+            }
+
+            if (viewModel.Password == null)
+            {
+                ModelState.AddModelError(string.Empty, Strings.AddUserPasswordRequired);
                 return View();
             }
 
@@ -63,6 +68,15 @@ namespace Appointify.Admin.Controllers
                 return View();
             }
 
+            if (viewModel.Role == Role.CompanyOwner)
+            {
+                var companyAlreadyHasOwner = await _dbContext.Companies.AnyAsync(c => c.Id == viewModel.CompanyId && c.UserId != null);
+                if (companyAlreadyHasOwner)
+                {
+                    ModelState.AddModelError(string.Empty, Strings.CompanyAlreadyHasOwner);
+                    return View();
+                }
+            }
 
             var salt = Cryptography.Salt.Create();
             var hash = Cryptography.Hash.Create(viewModel.Password, salt);
@@ -77,6 +91,14 @@ namespace Appointify.Admin.Controllers
 
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
+
+            if (viewModel.Role == Role.CompanyOwner)
+            {
+                var company = await _dbContext.Companies.FindAsync(viewModel.CompanyId);
+                company.UserId = user.Id;
+                _dbContext.Companies.Update(company);
+                await _dbContext.SaveChangesAsync();
+            }
 
             return View();
         }
