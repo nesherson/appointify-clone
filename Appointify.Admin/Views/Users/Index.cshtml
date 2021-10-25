@@ -1,12 +1,38 @@
-﻿@model Appointify.Admin.ViewModels.Users.IndexViewModel 
+﻿@model Appointify.Admin.ViewModels.Users.IndexViewModel
 
 @{
     ViewData["Title"] = Strings.Users;
     ViewData["Page"] = NavigationPages.Users;
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $(".delete-user").on("click", function () {
+            var idToDelete = $(this).data("id");
+            $("#idToDelete").val(idToDelete);
+        });
+
+        $("#removeBtn").on("click", function () {
+            var idToDelete = $("#idToDelete").val();
+            $("#user_" + idToDelete).hide("slow");
+            $.ajax({
+                url: '/Users/Remove',
+                type: 'POST',
+                data: { id: idToDelete },
+                success: function (data) {
+                    $("#remove-user-modal").modal("hide");
+                },
+                error: function (data) {
+                    $("#remove-user-modal").modal("hide");
+                    $("#user" + idToDelete).show();
+                }
+            });
+        });
+    })
+</script>
+
 <section class="section">
-   
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">@Strings.ShowingUsers</h4>
@@ -30,31 +56,45 @@
                     <tbody>
                         @foreach (var u in Model.Users)
                         {
-                        <tr id="city_@u.Id">
-                            <td>@u.FirstName</td>
-                            <td>@u.LastName</td>
-                            <td>@u.Username</td>
-                            <td>@u.Email</td>
-                            <td>@u.Role</td>
-                            <td>@u.City.Name</td>
-                            <td>
-                                <a asp-controller="Users" asp-action="EditUser" asp-route-id="@u.Id" class="btn btn-primary">@Strings.EditUser</a>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger delete-city" data-id="@u.Id" data-bs-toggle="modal" data-
-                                        data-bs-target="#remove-city-modal">
-                                    @Strings.RemoveUser
-                                </button>
-                            </td>
-                        </tr>
-                            }
+                            <tr id="user_@u.Id">
+                                <td>@u.FirstName</td>
+                                <td>@u.LastName</td>
+                                <td>@u.Username</td>
+                                <td>@u.Email</td>
+                                <td>@u.Role</td>
+                                <td>@u.City.Name</td>
+                                <td class="d-flex justify-content-between">
+                                    <a asp-controller="Users" asp-action="Edit" asp-route-id="@u.Id" class="btn btn-outline-primary p-2"><i class="bi bi-pencil-square"></i></a>
+                                    <button type="button" class="btn btn-outline-danger delete-user p-2" data-id="@u.Id" data-bs-toggle="modal" data-
+                                            data-bs-target="#remove-user-modal">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-   
-
+    <!--MODAL-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="remove-user-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Strings.RemoveUserConfirmation?</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="idToDelete" />
+                    <button type="submit" id="removeBtn" class="btn px-4 btn-danger">@Strings.Yes</button>
+                    <button type="button" class="btn px-4 btn-secondary" data-bs-dismiss="modal">@Strings.No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
