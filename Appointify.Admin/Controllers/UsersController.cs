@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
+
 using AutoMapper;
 
 using Appointify.Data;
@@ -9,6 +10,7 @@ using Appointify.Admin.ViewModels.Users;
 using Appointify.Admin.Resources;
 using Appointify.Shared.Utilities;
 using Appointify.Data.Entities;
+using Appointify.Admin.Utilities;
 
 namespace Appointify.Admin.Controllers
 {
@@ -38,6 +40,21 @@ namespace Appointify.Admin.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Filter(IndexViewModel viewModel)
+        {
+            viewModel.Users = await _dbContext.Users
+                .Where(u => (viewModel.FirstName.IsNotSet() || u.FirstName == viewModel.FirstName) &&
+                            (viewModel.LastName.IsNotSet() || u.LastName == viewModel.LastName) &&
+                            (viewModel.Username.IsNotSet() || u.Username == viewModel.Username) &&
+                            (viewModel.Email.IsNotSet() || u.Email == viewModel.Email) &&
+                            u.Role != Role.SuperAdministrator)
+                            .Include(u => u.City).ToListAsync();
+
+
+            return View("Index", viewModel);
         }
 
         [HttpGet]
@@ -101,6 +118,12 @@ namespace Appointify.Admin.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var user = await _dbContext.Users.FindAsync(id);
+            return View(_mapper.Map<EditViewModel>(user));
         }
 
         public async Task<IActionResult> Remove(int id)
