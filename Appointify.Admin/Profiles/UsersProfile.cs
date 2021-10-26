@@ -10,6 +10,7 @@ namespace Appointify.Admin.Profiles
         public UsersProfile()
         {
             CreateMap<AddViewModel, User>();
+            CreateMap<User, EditViewModel>().ReverseMap();
         }
     }
 }
