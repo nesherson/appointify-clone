@@ -34,6 +34,57 @@
 
 <section class="section">
     <div class="card">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between mb-3">
+                    <h4 class="card-title">@Strings.Search</h4>
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <a asp-action="Add" asp-controller="Users" class="btn btn-secondary px-4">
+                                @Strings.AddUser
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Filter" method="get" class="form">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input asp-for="FirstName" type="text" class="form-control" placeholder="@Strings.FirstName">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input asp-for="LastName" type="text" class="form-control" placeholder="@Strings.LastName">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input asp-for="Username" type="text" class="form-control" placeholder="@Strings.Username">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input asp-for="Email" type="text" class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="row form-group mx-1">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">@Strings.Search</button>
+                                </div>
+                            </div>
+                        </div>
+
+                </form>
+                </div>
+            </div>
+        </div>
         <div class="card-header">
             <h4 class="card-title">@Strings.ShowingUsers</h4>
         </div>
