@@ -1,0 +1,136 @@
+﻿@model Appointify.Admin.ViewModels.Users.EditViewModel
+
+@inject Dropdown Dropdown
+
+@{
+    ViewData["Title"] = Strings.EditUser;
+    ViewData["Page"] = NavigationPages.Users;
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+    $('#roleId').change(function (e) {
+      var role = $('#roleId').val();
+      if (role == 1) {
+        getCompanyList();
+        $('#companyListId').removeClass('fade');
+      } else {
+        $('#companyListId').addClass('fade');
+      }
+    });
+
+
+   
+        var role = $('#roleId').val();
+        if (role == 1) {
+            getCompanyList();
+            $('#companyListId').removeClass('fade');
+        } else {
+            $('#companyListId').addClass('fade');
+        }
+    
+
+        function getCompanyList () {
+    $.ajax({
+      url: '@Url.Action("GetCompanies","Users")',
+      type: 'GET',
+      success: function (data) {
+        $('#companyId').find('option').remove();
+        $(data).each(function (index, item) {
+          $('#companyId').append(
+            '<option value="' + item.id + '">' + item.name + '</option>'
+          );
+        });
+      },
+      error: function () {},
+    });
+  };
+
+    });
+</script>
+
+
+<div class="col-md-6 col-12">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <form asp-action="Edit" method="post" class="form form-horizontal">
+                    <div class="form-body">
+                        <div class="row">
+                            @if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger fade show mb-4" role="alert">
+                                    @Html.ValidationSummary()
+                                </div>
+                            }
+                            <div class="d-flex">
+                                <div class="col-md-4">
+                                    <label>@Strings.FirstName</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <input asp-for="FirstName" type="text" class="form-control" value="@Model.FirstName" placeholder="@Strings.FirstName">
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-4">
+                                    <label>@Strings.LastName</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <input asp-for="LastName" type="text" class="form-control" value="@Model.LastName" placeholder="@Strings.LastName">
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-4">
+                                    <label>@Strings.Username</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <input asp-for="Username" type="text" class="form-control" value="@Model.Username" placeholder="@Strings.Username">
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-4">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <input asp-for="Email" type="email" class="form-control" value="@Model.Email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-4">
+                                    <label>@Strings.City</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <select asp-for="CityId" class="form-control" id="cityId" asp-items="@await Dropdown.Cities()">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-4">
+                                    <label>@Strings.Role</label>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <select asp-for="Role" class="form-control" id="roleId" asp-items="Html.GetEnumSelectList<Role>()">
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="companyListId" class="d-flex fade">
+                                <div class="col-md-4">
+                                    <label>@Strings.Company</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select asp-for="CompanyId" class="form-control" id="companyId">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">@Strings.Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
