@@ -28,14 +28,8 @@
             </li>
             <li class="sidebar-item @(page == NavigationPages.Users ? "active" : "")">
                 <a asp-action="Index" asp-controller="Users" class="sidebar-link">
-                    <i class="bi bi-geo-alt"></i>
+                    <i class="bi bi-file-person"></i>
                     <span>@Strings.Users</span>
-                </a>
-            </li>
-            <li class="sidebar-item @(page == NavigationPages.AddUser ? "active" : "")">
-                <a asp-action="Add" asp-controller="Users" class="sidebar-link">
-                    <i class="bi bi-geo-alt"></i>
-                    <span>@Strings.AddUser</span>
                 </a>
             </li>
         }
