@@ -8,49 +8,7 @@
 }
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-
-    $('#roleId').change(function (e) {
-      var role = $('#roleId').val();
-      if (role == 1) {
-        getCompanyList();
-        $('#companyListId').removeClass('fade');
-      } else {
-        $('#companyListId').addClass('fade');
-      }
-    });
-
-
-   
-        var role = $('#roleId').val();
-        if (role == 1) {
-            getCompanyList();
-            $('#companyListId').removeClass('fade');
-        } else {
-            $('#companyListId').addClass('fade');
-        }
-    
-
-        function getCompanyList () {
-    $.ajax({
-      url: '@Url.Action("GetCompanies","Users")',
-      type: 'GET',
-      success: function (data) {
-        $('#companyId').find('option').remove();
-        $(data).each(function (index, item) {
-          $('#companyId').append(
-            '<option value="' + item.id + '">' + item.name + '</option>'
-          );
-        });
-      },
-      error: function () {},
-    });
-  };
-
-    });
-</script>
-
+<script src="~/js/GetCompanies.js" type="text/javascript"></script>
 
 <div class="col-md-6 col-12">
     <div class="card">
@@ -115,7 +73,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div id="companyListId" class="d-flex fade">
+                            <div id="companyListId" class="d-flex d-none mb-2">
                                 <div class="col-md-4">
                                     <label>@Strings.Company</label>
                                 </div>
@@ -124,7 +82,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-12 d-flex justify-content-end">
+                            <div class="col-sm-12  d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary me-1 mb-1">@Strings.Submit</button>
                             </div>
                         </div>
